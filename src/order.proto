@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package unary;
+
+// the ToyStore service will have two rpc calls which are "Query" and "Buy"
+service Order{
+    rpc Buy(order_details) returns (order_query) {}
+    rpc Check(order_query) returns (order_details) {}
+    rpc Ping(ping) returns (ping) {}
+    rpc Propagate(order_information) returns (ping) {}
+}
+
+// Declare a message type to send an item name
+message order_details{
+    string product_name = 1;
+    int32 quantity = 2;
+}
+
+message order_query{
+    int32 order_number = 1;
+}
+
+message ping{
+    int32 ping_number = 1;
+}
+
+message order_information{
+    int32 order_number = 1;
+    string product_name = 2;
+    int32 quantity = 3;
+}
+

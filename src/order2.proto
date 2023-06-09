@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package unary;
+
+service Recovery{
+    rpc RequestMissingLogs(stream missing_number) returns(ping2) {}
+    rpc BackOnline(ping2) returns (ping2) {}
+}
+
+message missing_number{
+    int32 order_number = 1;
+    int32 component_id = 2;
+}
+
+message ping2{
+    int32 ping_number = 1;
+}

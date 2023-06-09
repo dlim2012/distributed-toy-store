@@ -1,0 +1,20 @@
+aws ec2 run-instances --image-id ami-0d73480446600f555 --instance-type t2.micro --key-name vockey > instance.json
+
+aws ec2 describe-instances --instance-id <your-instance-id>
+
+# allows ssh access from anywhere
+aws ec2 authorize-security-group-ingress --group-name default --protocol tcp --port 22 --cidr 0.0.0.0/0
+
+aws ec2 create-image --instance-id <your-instance-id> --name test_image
+
+aws ec2 describe-images --image-ids <your-new-ami-id>
+
+aws ec2 terminate-instances --instance-ids <your-instance-id>
+
+aws ec2 run-instances --image-id <your-new-ami-id> --instance-type t2.micro --key-name vockey > instance.json
+
+aws ec2 deregister-image --image-id <your-new-ami-id>
+
+aws ec2 describe-snapshots --owner-ids self
+
+aws ec2 delete-snapshot --snapshot-id <your-snapshot-id>

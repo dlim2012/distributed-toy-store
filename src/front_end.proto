@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package unary;
+
+// The catalog component will send invalidate message to the front-end component using Invalidate RPC call
+service Front{
+    // Declare the rpc call "Invalidation" as an unary RPC
+    rpc Invalidate(product_front) returns (invalidation_response) {}
+
+}
+
+// Declare a message type to send an item name
+message product_front{
+    string product_name = 1;
+}
+
+// Declare the message type that will be used to send the response of the Query service
+message invalidation_response{
+    int32 response = 1;
+}

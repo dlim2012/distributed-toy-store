@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+
+  front_end:
+    build:
+      context: .
+      dockerfile: ./front-end.Dockerfile
+    ports:
+      - "1111:1111"
+    depends_on:
+      - order
+
+  order:
+    build:
+      context: .
+      dockerfile: ./order.Dockerfile
+    depends_on:
+      - catalog
+    volumes:
+      - ./toy-store/order/data:/data
+
+  catalog:
+    build:
+      context: .
+      dockerfile: ./catalog.Dockerfile
+    volumes:
+      - ./toy-store/catalog/data:/data

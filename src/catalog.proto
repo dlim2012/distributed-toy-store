@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package unary;
+
+// the ToyStore service will have two rpc calls which are "Query" and "Buy"
+service Catalog{
+    // Declare the rpc call "Query" as an unary RPC
+    rpc Query(product) returns (query_response) {}
+
+    // Declare the rpc call "Buy" as an unary RPC
+    rpc Order(order) returns (order_result) {}
+}
+
+// Declare a message type to send an item name
+message product{
+    string product_name = 1;
+}
+
+// Declare the message type that will be used to send the response of the Query service
+message query_response{
+    string price = 1;
+    int32 quantity = 2;
+}
+
+message order{
+    string product_name = 1;
+    int32 quantity = 2;
+}
+
+message order_result{
+    int32 order_result = 1;
+}
